@@ -1,11 +1,11 @@
-function Person(firstName, lastName) {
-  const emails = [];
-
-  this.firstName = firstName;
-  this.lastName = lastName;
+function Person(data) {
+  this.firstName = data.firstName;
+  this.lastName = data.lastName;
+  this.age = data.age;
+  this.emails = data.emails || [];
 
   this.getFullName = function () {
-    return `${this.firstName} ${this.lastName}`;
+    return this.firstName + ' ' + this.lastName;
   }
 
   this.addEmail = function (email) {
@@ -15,7 +15,7 @@ function Person(firstName, lastName) {
   }
 
   this.removeEmail = function (email) {
-    const index = emails.indexOf(email);
+    var index = emails.indexOf(email);
 
     if(index !== -1) {
       emails.splice(index, 1);
@@ -27,6 +27,10 @@ function Person(firstName, lastName) {
   }
 }
 
-const peter = new Person('Petter', 'Smith');
+var peter = new Person({
+  firstName: 'Petter',
+  lastName: 'Smith',
+  age: 25
+});
 
 console.log(peter.getFullName());
