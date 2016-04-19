@@ -1,15 +1,18 @@
-function Person(firstName, lastName) {
-  this.firstName = firstName;
-  this.lastName = lastName;
+/*
+  This is essentially the same as basic constructor pattern
+  but with the benefit that we create methods once and
+  not each time we instanctiate Person.
+*/
 
-  Object.defineProperty(this, 'emails', {
-    value: [],
-    writable: false
-  });
+function Person(data) {
+  this.firstName = data.firstName;
+  this.lastName = data.lastName;
+  this.age = data.age;
+  this.emails = data.emails || []
 }
 
 Person.prototype.getFullName = function () {
-  return `${this.firstName} ${this.lastName}`;
+  return this.firstName + ' ' + this.lastName;
 }
 
 Person.prototype.addEmail = function (email) {
@@ -19,13 +22,17 @@ Person.prototype.addEmail = function (email) {
 }
 
 Person.prototype.removeEmail = function (email) {
-  const index = this.emails.indexOf(email);
+  var index = this.emails.indexOf(email);
 
   if(index !== -1) {
     this.emails.splice(index, 1);
   }
 }
 
-const peter = new Person('Petter', 'Smith');
+var peter = new Person({
+  firstName: 'Petter',
+  lastName: 'Smith',
+  age: 25
+});
 
 console.log(peter.getFullName());

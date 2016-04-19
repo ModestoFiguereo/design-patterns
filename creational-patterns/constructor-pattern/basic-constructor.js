@@ -21,10 +21,6 @@ function Person(data) {
       emails.splice(index, 1);
     }
   }
-
-  this.getEmails = function() {
-    return emails.splice();
-  }
 }
 
 var peter = new Person({
